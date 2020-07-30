@@ -65,6 +65,13 @@
         order by id asc
     </select>
 
+    <select id="queryByCommandId" resultType="org.apache.dolphinscheduler.dao.entity.ProcessInstance">
+        select *
+        from t_ds_process_instance
+        where 1=1
+        and command_id =#{commandId}
+    </select>
+
     <select id="queryProcessInstanceListPaging" resultType="org.apache.dolphinscheduler.dao.entity.ProcessInstance">
         select instance.*
         from t_ds_process_instance instance

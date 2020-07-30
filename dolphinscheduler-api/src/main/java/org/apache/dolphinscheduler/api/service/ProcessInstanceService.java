@@ -679,4 +679,21 @@ public class ProcessInstanceService extends BaseDAGService {
         return result;
     }
 
+    public Map<String, Object> queryProcessInstanceByCommandId(User loginUser, String projectName, Integer commandId) {
+        Map<String, Object> result = new HashMap<>(5);
+        Project project = projectMapper.queryByName(projectName);
+        Map<String, Object> checkResult = projectService.checkProjectAndAuth(loginUser, project, projectName);
+        Status resultEnum = (Status) checkResult.get(Constants.STATUS);
+        if (resultEnum != Status.SUCCESS) {
+            return checkResult;
+        }
+        ProcessInstance processInstance = processInstanceMapper.queryByCommandId(commandId);
+        if (null == processInstance) {
+            putMsg(result, Status.PROCESS_INSTANCE_NOT_EXIST, commandId);
+            return result;
+        }
+        result.put(Constants.DATA_LIST, result);
+        putMsg(result, Status.SUCCESS);
+        return result;
+    }
 }

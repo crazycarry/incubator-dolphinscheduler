@@ -217,6 +217,36 @@ public class ProcessInstanceController extends BaseController{
         }
     }
 
+
+    /**
+     * query process instance by command id
+     *
+     * @param loginUser login user
+     * @param projectName project name
+     * @param commandId process instance id
+     * @return process instance detail
+     */
+    @ApiOperation(value = "queryProcessInstanceByCommandId", notes= "QUERY_PROCESS_INSTANCE_BY_COMMAND_ID_NOTES")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "commandId", value = "PROCESS_INSTANCE_ID", dataType = "Int", example = "100")
+    })
+    @GetMapping(value="/select-by-command-id")
+    @ResponseStatus(HttpStatus.OK)
+    public Result queryProcessInstanceByCommandId(@ApiIgnore @RequestAttribute(value = Constants.SESSION_USER) User loginUser,
+                                           @ApiParam(name = "projectName", value = "PROJECT_NAME", required = true) @PathVariable String projectName,
+                                           @RequestParam("commandId") Integer commandId
+    ){
+        try{
+            logger.info("query process instance detail by id, login user:{},project name:{}, command id:{}",
+                    loginUser.getUserName(), projectName, commandId);
+            Map<String, Object> result = processInstanceService.queryProcessInstanceByCommandId(loginUser, projectName, commandId);
+            return returnDataList(result);
+        }catch (Exception e){
+            logger.error(QUERY_PROCESS_INSTANCE_BY_ID_ERROR.getMsg(),e);
+            return error(Status.QUERY_PROCESS_INSTANCE_BY_ID_ERROR.getCode(), Status.QUERY_PROCESS_INSTANCE_BY_ID_ERROR.getMsg());
+        }
+    }
+
     /**
      * delete process instance by id, at the same time,
      * delete task instance and their mapping relation data

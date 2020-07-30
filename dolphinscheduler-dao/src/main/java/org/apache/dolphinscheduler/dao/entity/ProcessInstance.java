@@ -91,6 +91,11 @@ public class ProcessInstance {
     private String commandParam;
 
     /**
+     * command id
+     */
+    private int commandId;
+
+    /**
      * node depend type
      */
     private TaskDependType taskDependType;
@@ -575,6 +580,14 @@ public class ProcessInstance {
 
     public void setReceiversCc(String receiversCc) {
         this.receiversCc = receiversCc;
+    }
+
+    public int getCommandId() {
+        return commandId;
+    }
+
+    public void setCommandId(int commandId) {
+        this.commandId = commandId;
     }
 
     @Override

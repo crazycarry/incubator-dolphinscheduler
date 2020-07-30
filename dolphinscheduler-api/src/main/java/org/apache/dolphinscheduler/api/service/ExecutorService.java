@@ -134,6 +134,7 @@ public class ExecutorService extends BaseService{
             processDefinition.setReceivers(receivers);
             processDefinition.setReceiversCc(receiversCc);
             processDefinitionMapper.updateById(processDefinition);
+            result.put(Constants.DATA_LIST,create);
             putMsg(result, Status.SUCCESS);
         } else {
             putMsg(result, Status.START_PROCESS_INSTANCE_ERROR);

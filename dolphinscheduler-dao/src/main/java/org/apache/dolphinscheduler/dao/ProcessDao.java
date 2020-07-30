@@ -129,6 +129,7 @@ public class ProcessDao {
             return setWaitingThreadProcess(command, processInstance);
         }
         processInstance.setCommandType(command.getCommandType());
+        processInstance.setCommandId(command.getId());
         processInstance.addHistoryCmd(command.getCommandType());
         saveProcessInstance(processInstance);
         this.setSubProcessParam(processInstance);
@@ -184,7 +185,8 @@ public class ProcessDao {
     public int createCommand(Command command) {
         int result = 0;
         if (command != null){
-            result = commandMapper.insert(command);
+            commandMapper.insert(command);
+            return command.getId();
         }
         return result;
     }

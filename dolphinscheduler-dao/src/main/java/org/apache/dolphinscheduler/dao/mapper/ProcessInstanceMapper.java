@@ -145,6 +145,13 @@ public interface ProcessInstanceMapper extends BaseMapper<ProcessInstance> {
             @Param("size") int size);
 
     /**
+     * query process instance by processDefinitionId
+     * @param commandId processDefinitionId
+     * @return process instance list
+     */
+    ProcessInstance queryByCommandId(@Param("commandId") int commandId);
+
+    /**
      * query last scheduler process instance
      * @param definitionId processDefinitionId
      * @param startTime startTime
