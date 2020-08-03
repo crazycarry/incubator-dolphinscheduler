@@ -692,7 +692,7 @@ public class ProcessInstanceService extends BaseDAGService {
             putMsg(result, Status.PROCESS_INSTANCE_NOT_EXIST, commandId);
             return result;
         }
-        result.put(Constants.DATA_LIST, result);
+        result.put(Constants.DATA_LIST, processInstance);
         putMsg(result, Status.SUCCESS);
         return result;
     }
